@@ -45,8 +45,50 @@ const useCamera = () => {
   return { videoRef, canvasRef, permissionGranted, capturedImage, captureFrame };
 };
 
-const postEvent = async (capturedImage: String) => {
-    console.log(capturedImage)
+const postEvent = async (capturedImage: string) => {
+  try {
+    const blob = dataURLtoBlob(capturedImage);
+    const file = new File([blob], 'captured.png', { type: 'image/png' });
+
+    const formData = new FormData();
+    formData.append('type', 'facial');
+    formData.append('image', file);
+    formData.append('action', 'registrar');
+
+    for (let [key, value] of formData.entries()) {
+      console.log(`${key}:`, value);
+    }
+
+    const response = await fetch('http://localhost:8080/api/events/register', {
+      method: 'POST',
+      body: formData,
+    });
+
+    const text = await response.text();
+    try {
+      const result = JSON.parse(text);
+      console.log('Resposta JSON:', result);
+    } catch {
+      console.log('Resposta não-JSON:', text);
+    }
+  } catch (error) {
+    console.error('Erro ao enviar imagem:', error);
+  }
+};
+
+
+
+function dataURLtoBlob(dataURL: string): Blob {
+  const arr = dataURL.split(',');
+  const mimeMatch = arr[0].match(/:(.*?);/);
+  const mime = mimeMatch ? mimeMatch[1] : '';
+  const bstr = atob(arr[1]);
+  let n = bstr.length;
+  const u8arr = new Uint8Array(n);
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new Blob([u8arr], { type: mime });
 }
 
 const CameraStream: React.FC = () => {
@@ -60,7 +102,7 @@ const CameraStream: React.FC = () => {
       <video ref={videoRef} autoPlay playsInline />
       <canvas ref={canvasRef} style={{ display: "none" }} />
       <button onClick={captureFrame}>Frame</button>
-      {capturedImage && <button onClick={() => {postEvent(capturedImage)}}>Send</button>}
+      {capturedImage && <button onClick={() => { postEvent(capturedImage) }}>Send</button>}
       {capturedImage && <img src={capturedImage} alt="captured" />}
     </div>
   );

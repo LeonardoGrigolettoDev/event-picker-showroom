@@ -1,5 +1,6 @@
-html{
-  background-color: #121212; /* Fundo escuro */
+html {
+  background-color: #121212;
+  /* Fundo escuro */
   overflow-y: hidden !important;
 }
 
@@ -9,14 +10,16 @@ html{
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-color: #121212; /* Fundo escuro */
+  background-color: #121212;
+  /* Fundo escuro */
   padding: 20px;
 }
 
 .homeTitle {
   font-size: 2rem;
   font-weight: bold;
-  color: #ffffff; /* Texto claro para contraste */
+  color: #ffffff;
+  /* Texto claro para contraste */
   margin-bottom: 20px;
 }
 
@@ -25,15 +28,18 @@ html{
   flex-direction: column;
   width: 100%;
   max-width: 400px;
-  background: #1e1e1e; /* Fundo levemente mais claro que o fundo principal */
+  background: #1e1e1e;
+  /* Fundo levemente mais claro que o fundo principal */
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Sombra mais sutil */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  /* Sombra mais sutil */
 }
 
 .homeLabel {
   font-size: 1rem;
-  color: #cccccc; /* Texto claro para contraste */
+  color: #cccccc;
+  /* Texto claro para contraste */
   margin-bottom: 8px;
 }
 
@@ -42,16 +48,20 @@ html{
   padding: 10px;
   font-size: 1rem;
   gap: 3rem;
-  border: 1px solid #333333; /* Bordas escuras */
-  background-color: #1e1e1e; /* Fundo do input */
-  color: #ffffff; /* Texto claro */
+  border: 1px solid #333333;
+  /* Bordas escuras */
+  background-color: #1e1e1e;
+  /* Fundo do input */
+  color: #ffffff;
+  /* Texto claro */
   border-radius: 4px;
   margin-bottom: 16px;
   transition: border-color 0.3s ease;
 }
 
 .homeInput:focus {
-  border-color: #007bff; /* Destaque azul ao focar */
+  border-color: #007bff;
+  /* Destaque azul ao focar */
   outline: none;
 }
 
@@ -59,8 +69,10 @@ html{
   width: 100%;
   padding: 10px;
   font-size: 1rem;
-  color: #ffffff; /* Texto claro */
-  background-color: #007bff; /* Azul para contraste */
+  color: #ffffff;
+  /* Texto claro */
+  background-color: #007bff;
+  /* Azul para contraste */
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -68,13 +80,13 @@ html{
 }
 
 .homeButton:hover {
-  background-color: #0056b3; 
+  background-color: #0056b3;
 }
 
 .toggleButton {
   background: none;
   border: none;
-  color: #007bff; 
+  color: #007bff;
   cursor: pointer;
   margin-top: 15px;
   text-decoration: underline;
@@ -82,7 +94,7 @@ html{
 }
 
 .toggleButton:hover {
-  color: #0056b3; 
+  color: #0056b3;
 }
 
 .formSection {
@@ -90,4 +102,46 @@ html{
   flex-direction: column;
   gap: 10px;
   width: 100%;
+}
+
+.message {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 16px 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  text-align: center;
+  font-weight: bold;
+  min-width: 250px;
+}
+
+.success {
+  background: #4caf50;
+  color: white;
+}
+
+.error {
+  background: #f44336;
+  color: white;
+}
+
+.loadingBar {
+  height: 4px;
+  margin-top: 8px;
+  background-color: white;
+  animation: shrink 3s linear forwards;
+  border-radius: 2px;
+}
+
+@keyframes shrink {
+  from {
+    width: 100%;
+  }
+
+  to {
+    width: 0%;
+  }
 }

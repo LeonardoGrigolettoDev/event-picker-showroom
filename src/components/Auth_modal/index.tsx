@@ -2,31 +2,48 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 
-// type props = {
-//   props: React.ReactElement;
-// };
-
 export function AuthModal() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isLogin, setIsLogin] = useState<boolean>(true);
+  const [message, setMessage] = useState<{ text: string; type: "success" | "error" } | null>(null); // Estado para a mensagem
   const navigate = useNavigate();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (isLogin) {
-      console.log("Login enviado: ", email, password);
-      navigate("/Event");
-    } else {
-      console.log("Cadastro enviado: ", email, password);
 
+    if (isLogin) {
+      const saved = JSON.parse(localStorage.getItem("cadastro") || "{}");
+
+      if (email === saved.email && password === saved.password) {
+        console.log("Login realizado com sucesso.");
+        setMessage({ text: "Login realizado com sucesso. Redirecionando...", type: "success" });
+        setTimeout(() => setMessage(null), 3000); // Remove após 3 segundos
+        navigate("/Event");
+      } else {
+        setMessage({ text: "E-mail ou senha inválidos.", type: "error" });
+        setTimeout(() => setMessage(null), 3000); // Remove após 3 segundos
+      }
+
+    } else {
+      localStorage.setItem("cadastro", JSON.stringify({ email, password }));
+      console.log("Cadastro realizado: ", email, password);
+      setMessage({ text: "Cadastro realizado com sucesso. Faça login.", type: "success" });
+      setTimeout(() => setMessage(null), 3000); // Remove após 3 segundos
       setIsLogin(true);
     }
-    navigate("/Event");
   };
 
   return (
     <div className={styles.homeContainer}>
+      {/* Exibe a mensagem de sucesso ou erro com barra de carregamento */}
+      {message && (
+        <div className={`${styles.message} ${styles[message.type]}`}>
+          <span>{message.text}</span>
+          <div className={styles.loadingBar}></div>
+        </div>
+      )}
+
       <h1 className={styles.homeTitle}>{isLogin ? "Login" : "Register"}</h1>
       <form className={styles.homeForm} onSubmit={handleSubmit}>
         {isLogin ? (
@@ -87,14 +104,13 @@ export function AuthModal() {
         <button className={styles.homeButton} type="submit">
           {isLogin ? "Login" : "Register"}
         </button>
+
         <button
           type="button"
           className={styles.toggleButton}
           onClick={() => setIsLogin(!isLogin)}
         >
-          {isLogin
-            ? "Does not have account? Register it"
-            : "Login"}
+          {isLogin ? "Does not have account? Register it" : "Login"}
         </button>
       </form>
     </div>

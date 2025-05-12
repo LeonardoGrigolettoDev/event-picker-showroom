@@ -6,7 +6,7 @@ export function AuthModal() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isLogin, setIsLogin] = useState<boolean>(true);
-  const [message, setMessage] = useState<{ text: string; type: "success" | "error" } | null>(null); // Estado para a mensagem
+  const [message, setMessage] = useState<{ text: string; type: "success" | "error" } | null>(null); 
   const navigate = useNavigate();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -16,27 +16,24 @@ export function AuthModal() {
       const saved = JSON.parse(localStorage.getItem("cadastro") || "{}");
 
       if (email === saved.email && password === saved.password) {
-        console.log("Login realizado com sucesso.");
         setMessage({ text: "Login realizado com sucesso. Redirecionando...", type: "success" });
-        setTimeout(() => setMessage(null), 3000); // Remove após 3 segundos
+        setTimeout(() => setMessage(null), 3000); 
         navigate("/Event");
       } else {
         setMessage({ text: "E-mail ou senha inválidos.", type: "error" });
-        setTimeout(() => setMessage(null), 3000); // Remove após 3 segundos
+        setTimeout(() => setMessage(null), 3000); 
       }
 
     } else {
       localStorage.setItem("cadastro", JSON.stringify({ email, password }));
-      console.log("Cadastro realizado: ", email, password);
       setMessage({ text: "Cadastro realizado com sucesso. Faça login.", type: "success" });
-      setTimeout(() => setMessage(null), 3000); // Remove após 3 segundos
+      setTimeout(() => setMessage(null), 3000); 
       setIsLogin(true);
     }
   };
 
   return (
     <div className={styles.homeContainer}>
-      {/* Exibe a mensagem de sucesso ou erro com barra de carregamento */}
       {message && (
         <div className={`${styles.message} ${styles[message.type]}`}>
           <span>{message.text}</span>

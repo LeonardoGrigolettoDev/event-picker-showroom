@@ -5,9 +5,32 @@ import styles from "./styles.module.css";
 export function AuthModal() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [name, setName] = useState<string>("");
+
   const [isLogin, setIsLogin] = useState<boolean>(true);
-  const [message, setMessage] = useState<{ text: string; type: "success" | "error" } | null>(null); 
+  const [message, setMessage] = useState<{
+    text: string;
+    type: "success" | "error";
+  } | null>(null);
   const navigate = useNavigate();
+
+  async function sendData() {
+    const response = await fetch("http://localhost:8080/api/users", {
+      method: "POST",
+      body: JSON.stringify({
+        email: email,
+        password: password,
+        name: name,
+        type: "demo",
+        entity: {
+          name: name,
+          type: "legal",
+        },
+      }),
+    });
+
+    console.log("Dados enviados", await response.json());
+  }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -16,20 +39,28 @@ export function AuthModal() {
       const saved = JSON.parse(localStorage.getItem("cadastro") || "{}");
 
       if (email === saved.email && password === saved.password) {
-        setMessage({ text: "Login realizado com sucesso. Redirecionando...", type: "success" });
-        setTimeout(() => setMessage(null), 3000); 
+        setMessage({
+          text: "Login realizado com sucesso. Redirecionando...",
+          type: "success",
+        });
+        setTimeout(() => setMessage(null), 3000);
         navigate("/Event");
-      } else {
-        setMessage({ text: "E-mail ou senha inválidos.", type: "error" });
-        setTimeout(() => setMessage(null), 3000); 
+        return;
       }
-
-    } else {
-      localStorage.setItem("cadastro", JSON.stringify({ email, password }));
-      setMessage({ text: "Cadastro realizado com sucesso. Faça login.", type: "success" });
-      setTimeout(() => setMessage(null), 3000); 
-      setIsLogin(true);
+      setMessage({ text: "E-mail ou senha inválidos.", type: "error" });
+      setTimeout(() => setMessage(null), 3000);
+      return;
     }
+    localStorage.setItem(
+      "cadastro",
+      JSON.stringify({ })
+    );
+    setMessage({
+      text: "Cadastro realizado com sucesso. Faça login.",
+      type: "success",
+    });
+    setTimeout(() => setMessage(null), 3000);
+    setIsLogin(true);
   };
 
   return (
@@ -72,6 +103,18 @@ export function AuthModal() {
           </div>
         ) : (
           <div className={styles.formSection}>
+            <label className={styles.homeLabel} htmlFor="name">
+              Type your full name:
+            </label>
+            <input
+              className={styles.homeInput}
+              type="text"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              placeholder="Type your name"
+            />
             <label className={styles.homeLabel} htmlFor="email">
               Email Register:
             </label>
@@ -98,7 +141,13 @@ export function AuthModal() {
             />
           </div>
         )}
-        <button className={styles.homeButton} type="submit">
+        <button
+          className={styles.homeButton}
+          type="submit"
+          onClick={(_e) => {
+            sendData();
+          }}
+        >
           {isLogin ? "Login" : "Register"}
         </button>
 

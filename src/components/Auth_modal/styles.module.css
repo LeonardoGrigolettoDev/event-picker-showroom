@@ -1,6 +1,5 @@
 html {
   background-color: #121212;
-  /* Fundo escuro */
   overflow-y: hidden !important;
 }
 
@@ -11,15 +10,12 @@ html {
   justify-content: center;
   min-height: 100vh;
   background-color: #121212;
-  /* Fundo escuro */
-  padding: 20px;
 }
 
 .homeTitle {
   font-size: 2rem;
   font-weight: bold;
   color: #ffffff;
-  /* Texto claro para contraste */
   margin-bottom: 20px;
 }
 
@@ -29,17 +25,14 @@ html {
   width: 100%;
   max-width: 400px;
   background: #1e1e1e;
-  /* Fundo levemente mais claro que o fundo principal */
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-  /* Sombra mais sutil */
 }
 
 .homeLabel {
   font-size: 1rem;
   color: #cccccc;
-  /* Texto claro para contraste */
   margin-bottom: 8px;
 }
 
@@ -49,11 +42,8 @@ html {
   font-size: 1rem;
   gap: 3rem;
   border: 1px solid #333333;
-  /* Bordas escuras */
   background-color: #1e1e1e;
-  /* Fundo do input */
   color: #ffffff;
-  /* Texto claro */
   border-radius: 4px;
   margin-bottom: 16px;
   transition: border-color 0.3s ease;
@@ -61,7 +51,6 @@ html {
 
 .homeInput:focus {
   border-color: #007bff;
-  /* Destaque azul ao focar */
   outline: none;
 }
 
@@ -70,9 +59,7 @@ html {
   padding: 10px;
   font-size: 1rem;
   color: #ffffff;
-  /* Texto claro */
   background-color: #007bff;
-  /* Azul para contraste */
   border: none;
   border-radius: 4px;
   cursor: pointer;

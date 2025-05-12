@@ -59,7 +59,7 @@ const postEvent = async (capturedImage: string) => {
       console.log(`${key}:`, value);
     }
 
-    const response = await fetch('http://localhost:8080/api/events/register', {
+    const response = await fetch('http://localhost:8080/api/events', {
       method: 'POST',
       body: formData,
     });

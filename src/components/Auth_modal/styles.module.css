@@ -68,26 +68,26 @@ html{
 }
 
 .homeButton:hover {
-  background-color: #0056b3; /* Azul mais escuro ao passar o mouse */
+  background-color: #0056b3; 
 }
 
 .toggleButton {
   background: none;
   border: none;
-  color: #007bff; /* Azul para contraste */
+  color: #007bff; 
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 15px;
   text-decoration: underline;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 .toggleButton:hover {
-  color: #0056b3; /* Azul mais escuro ao passar o mouse */
+  color: #0056b3; 
 }
 
 .formSection {
   display: flex;
   flex-direction: column;
-  gap: 10px; /* Espaçamento entre os elementos */
+  gap: 10px;
   width: 100%;
 }

@@ -1,0 +1,130 @@
+html {
+    overflow-x: hidden !important;
+    background-color: #121212 ;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  /* background: linear-gradient(to right, #f7f9fc, #e3ecf3); */
+  min-height: 100vh;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.videoContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.video {
+  width: 100%;
+  max-width: 640px;
+  height: auto;
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background-color: black;
+
+  /* 👇 Inversão horizontal para corrigir o efeito espelho */
+  transform: scaleX(-1);
+}
+
+.button {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.75rem;
+  background: #007BFF;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 123, 255, 0.3);
+}
+
+.button:hover {
+  background: #0056b3;
+  transform: scale(1.03);
+}
+
+.captureContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.capturedImage {
+  width: 100%;
+  max-width: 320px;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  margin-bottom: 1rem;
+
+  /* 👇 Mantém a imagem capturada na orientação original */
+  transform: scaleX(1);
+}
+
+.sendButton {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.75rem;
+  background: #28a745;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 6px rgba(40, 167, 69, 0.3);
+}
+
+.sendButton:hover {
+  background: #1e7e34;
+  transform: scale(1.03);
+}
+
+.homeContainer {
+  padding: 2rem;
+  text-align: center;
+}
+
+.pageTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 2rem;
+  position: relative;
+  display: inline-block;
+  animation: fadeInDown 0.8s ease-out;
+}
+
+.pageTitle::after {
+  content: "";
+  position: absolute;
+  width: 60%;
+  height: 4px;
+  background: #007BFF;
+  bottom: -8px;
+  left: 20%;
+  border-radius: 2px;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+

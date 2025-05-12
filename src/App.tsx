@@ -2,7 +2,7 @@ import React from "react";
 import { AuthModal } from "./components/Auth_modal/index.tsx";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Event from "./pages/Event";
+import Event from "./pages/Event/Event.tsx";
 
 import "./App.css"; 
 import "./index.css";

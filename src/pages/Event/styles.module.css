@@ -1,6 +1,6 @@
 html {
-    overflow-x: hidden !important;
-    background-color: #121212 ;
+  overflow-x: hidden !important;
+  background-color: #121212;
 }
 
 .container {
@@ -72,21 +72,21 @@ html {
 }
 
 .sendButton {
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 600;
-  border: none;
-  border-radius: 0.75rem;
-  background: #28a745;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  background-color: #007bff;
   color: white;
+  border: none;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 2px 6px rgba(40, 167, 69, 0.3);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .sendButton:hover {
-  background: #1e7e34;
-  transform: scale(1.03);
+  background-color: #0056b3;
+  transform: translateY(-2px);
 }
 
 .homeContainer {
@@ -115,6 +115,14 @@ html {
   border-radius: 2px;
 }
 
+.containerButtons {
+  display: flex;
+  justify-content: center; /* centraliza horizontalmente */
+  align-items: center;
+  gap: 12px; /* espaçamento entre os botões */
+  margin-top: 20px;
+}
+
 @keyframes fadeInDown {
   from {
     opacity: 0;
@@ -126,5 +134,3 @@ html {
     transform: translateY(0);
   }
 }
-
-

@@ -67,12 +67,30 @@ const useCamera = () => {
 const postEvent = async (capturedImage: string) => {
   try {
     const blob = dataURLtoBlob(capturedImage);
-    const file = new File([blob], "captured.png", { type: "image/png" });
+    const entity_id = localStorage.getItem("entity_id");
+    const date = new Date();
+
+    if (!entity_id) {
+      console.error("ID da entidade não encontrado no localStorage.");
+      return;
+    }
+
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = String(date.getFullYear()).slice(-2);
+    const formattedDate = `${day}/${month}/${year}`;
+
+    const file = new File([blob], entity_id, {
+      type: "image/png",
+      lastModified: date.getTime(),
+    });
 
     const formData = new FormData();
-    formData.append("type", "facial");
+    formData.append("entity_id", entity_id);
+    formData.append("types", "facial");
     formData.append("image", file);
-    formData.append("action", "registrar");
+    formData.append("override", "false");
+    formData.append("date", formattedDate);
 
     for (let [key, value] of formData.entries()) {
       console.log(`${key}:`, value);
@@ -83,13 +101,8 @@ const postEvent = async (capturedImage: string) => {
       body: formData,
     });
 
-    const text = await response.text();
-    try {
-      const result = JSON.parse(text);
-      console.log("Resposta JSON:", result);
-    } catch {
-      console.log("Resposta não-JSON:", text);
-    }
+    const data = await response.json();
+    console.log("RESPOSTA", data);
   } catch (error) {
     console.error("Erro ao enviar imagem:", error);
   }
@@ -137,12 +150,25 @@ const CameraStream: React.FC = () => {
             alt="capturada"
             className={styles.capturedImage}
           />
-          <button
-            className={styles.sendButton}
-            onClick={() => postEvent(capturedImage)}
-          >
-            📤 Send
-          </button>
+          <div className="containerButtons">
+            <div className="buttons">
+              <button
+                className={styles.sendButton}
+                onClick={() => postEvent(capturedImage)}
+              >
+                📤 Register
+              </button>
+            </div>
+
+            <div className="buttons">
+              <button
+                className={styles.sendButton}
+                // onClick={() => postEvent(capturedImage)}
+              >
+                📤 Compare
+              </button>
+            </div>
+          </div>
         </div>
       )}
 

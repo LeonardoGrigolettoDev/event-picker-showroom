@@ -17,6 +17,9 @@ export function AuthModal() {
   async function sendData() {
     const response = await fetch("http://localhost:8080/api/users", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         email: email,
         password: password,
@@ -28,6 +31,10 @@ export function AuthModal() {
         },
       }),
     });
+
+    const data = await response.json();
+
+    localStorage.setItem("entity_id", data.entity_id);
 
     console.log("Dados enviados", await response.json());
   }
@@ -51,10 +58,7 @@ export function AuthModal() {
       setTimeout(() => setMessage(null), 3000);
       return;
     }
-    localStorage.setItem(
-      "cadastro",
-      JSON.stringify({ })
-    );
+    localStorage.setItem("cadastro", JSON.stringify({}));
     setMessage({
       text: "Cadastro realizado com sucesso. Faça login.",
       type: "success",
